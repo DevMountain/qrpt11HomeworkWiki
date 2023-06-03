@@ -13,57 +13,50 @@ class Animal {
   }
   
   /**
-   * Fish extends Animal, but takes different properties, has a different soundOff() method, and a new method, habitat().
-   * @param {string} name - as expected
-   * @param {string} food - as expected
-   * @param {string} saltwater - true if the fish is a saltwater fish
-   */
+  * Fish extends Animal, but takes different properties, has a different soundOff() method, and a new method, habitat().
+  * @param {string} name - as expected
+  * @param {string} food - as expected
+  * @param {string} saltwater - true if the fish is a saltwater fish
+  */
   class Fish extends Animal {
-    saltwater: boolean;
-    // As required, has the name, food, and saltwater parameters
-    constructor(name: string, food: string, saltwater: boolean) {
-      // Passes the parent (Animal) constructor its three parameters, where
-      // `sound` is `null`, as the Fish class doesn't use that property.
-      super(name, null, food);
-      this.saltwater = saltwater;
-    }
-    // Here we have the right format for the new soundOff
-    soundOff(): string {
-      return `The ${this.name} is a fish and does not make sounds.`;
-    }
-    // Here is the new habitat method, returning a string based on the `saltwater`
-    // property
-    habitat(): string {
-      return `The ${this.name} is a ${
-        this.saltwater ? "saltwater" : "freshwater"
-      } fish.`;
-    }
+      saltwater: boolean; 
+      // Required param for the fish class that is unique to the fish class.
+      constructor(name: string, food: string, saltwater: boolean) {
+          super(name, null, food);
+          //pulling from the class you are extending.
+          this.saltwater= saltwater; 
+          //adding new params into the constructor to be able to use outside of the class.
+      }
+      soundOfff(): string {
+          return `The ${this.name} is a fish and does not make sounds.`;
+      };
+      habitat():string {
+          return `The ${this.name} is a ${
+          this.saltwater ? "saltwater" : "freshwater"} fish.`;
+          //   ? means options for your true/false  true : false
+      }
   }
-  
   /**
-   * Bird extends Animal, but takes an additional property, and has an additional method, fly().
-   * @param {string} name - as expected
-   * @param {string} sound - as expected
-   * @param {string} food - as expected
-   * @param {number} flightSpeed - the flight speed of the bird, in meters/second. This should be 0 for flightless birds.
-   */
-  class Bird extends Animal {
-    flightSpeed: number;
-    // this constructor takes one more parameter than Animal, flightSpeed
-    constructor(name: string, sound: string, food: string, flightSpeed: number) {
-      // we use Animal's constructor for 3 of our 4 parameters
-      super(name, sound, food);
-      this.flightSpeed = flightSpeed;
-    }
-    // we only need to define the ONE new method; fly, that returns the correct
-    // string for flying or flightless birds
-    fly(): string {
-      if (this.flightSpeed > 0)
-        return `The ${this.name} flies at speeds of up to ${this.flightSpeed} meters per second!`;
-      else return `The ${this.name} is a flightless bird.`;
-    }
-  }
+  * Bird extends Animal, but takes an additional property, and has an additional method, fly().
+  * @param {string} name - as expected
+  * @param {string} sound - as expected
+  * @param {string} food - as expected
+  * @param {number} flightSpeed - the flight speed of the bird, in meters/second. This should be 0 for flightless birds.
+  */
   
+  class Bird extends Animal {
+      flightSpeed: number; 
+      constructor(name: string, sound: string, food: string, flightSpeed: number) {
+          super(name,sound,food);
+          this.flightSpeed = flightSpeed;
+      };
+      fly(): string {
+          if (this.flightSpeed > 0)
+          return`The ${this.name} flies at speeds of up to ${this.flightSpeed} meters per second!`;
+          else return `The ${this.name} is a flightless bird.`;
+      }
+  }
+
   describe("Testing animals", () => {
     test("a basic animal works as expected", () => {
       let lion = new Animal("lion", "roar", "meat");
@@ -82,7 +75,7 @@ class Animal {
       });
       it("doesn't make sound", () => {
         // Fish should give the expected soundOff, it's own version
-        expect(goldfish.soundOff()).toBe(
+        expect(goldfish.soundOfff()).toBe(
           "The goldfish is a fish and does not make sounds."
         );
       });
